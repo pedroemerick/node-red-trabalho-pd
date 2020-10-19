@@ -1,0 +1,12 @@
+{
+    "name" : "node-red-contrib-imd-water-quality",
+    "version": "0.0.1",
+    "description": "Node that verifies the situation of the sensor value",
+    "dependencies": {},
+    "keywords": ["node-red"],
+    "node-red" : {
+        "nodes": {
+            "check-value": "check-value-node/check-value.js"
+        }
+    }
+}

@@ -1,0 +1,51 @@
+<script type="text/javascript">
+    RED.nodes.registerType('check-value',{
+        category: 'Water Quality',
+        color: '#87A980',
+        defaults: {
+            name: {value:""},
+            sensor: {value:""},
+            minimumValue: {value:0, validate:RED.validators.number()},
+            maximumValue: {value:0}, validate:RED.validators.number(),
+            idealMinimumValue: {value:0, validate:RED.validators.number()},
+            idealMaximumValue: {value:0, validate:RED.validators.number()}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "font-awesome/fa-check-circle",
+        label: function() {
+            return this.name||"check-value";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="check-value">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-sensor"><i class="fa fa-microchip"></i> Sensor</label>
+        <input type="text" id="node-input-sensor" placeholder="Sensor" required="true">
+    </div>
+    <div class="form-row">
+        <label for="node-input-minimumValue"><i class="fa fa-arrow-down"></i> Minimum Value</label>
+        <input type="number" id="node-input-minimumValue" placeholder="Minimum Value" required="true">
+    </div>
+    <div class="form-row">
+        <label for="node-input-maximumValue"><i class="fa fa-arrow-up"></i> Maximum Value</label>
+        <input type="number" id="node-input-maximumValue" placeholder="Maximum Value" required="true">
+    </div>
+    <div class="form-row">
+        <label for="node-input-idealMinimumValue"><i class="fa fa-arrow-circle-down"></i> Ideal Minimum Value</label>
+        <input type="number" id="node-input-idealMinimumValue" placeholder="Ideal Minimum Value" required="true">
+    </div>
+    <div class="form-row">
+        <label for="node-input-idealMaximumValue"><i class="fa fa-arrow-circle-up"></i> Ideal Maximum Value</label>
+        <input type="number" id="node-input-idealMaximumValue" placeholder="Ideal Maximum Value" required="true">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="check-value">
+    <p>Node that verifies the situation of the sensor value, the possible situations being "Within the limit", "Out of the limit" and "Within the ideal".</p>
+</script>
