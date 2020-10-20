@@ -16,37 +16,43 @@ module.exports = function(RED) {
             var idealMinimumValue = node.idealMinimumValue;
             var idealMaximumValue = node.idealMaximumValue;
 
-            // console.log(sensor);
-            // console.log(minimumValue);
-            // console.log(maximumValue);
-            // console.log(idealMaximumValue);
-            // console.log(idealMinimumValue);
-
             var inMsg = msg.payload;
-            var response = {"sensor": sensor};
 
-            // try {
-                var value = inMsg.d[sensor].valor;
-                response["value"] = value;
-                
-                if (value >= idealMinimumValue && value <= idealMaximumValue) {
-                    response["situation"] = "Within the ideal";
-                } else if (value >= minimumValue && value <= maximumValue) {
-                    response["situation"] = "Within the limit";
-                } else {
-                    response["situation"] = "Out of the limit";
-                }
-            // } catch (err) {
-            //     console.log(err);
+            var value = inMsg.d[sensor].valor;
+            var situation;
 
-            //     if (done) {
-            //         done(err);
-            //     } else {
-            //         node.error(err, msg);
-            //     }
+            if ((idealMinimumValue && idealMaximumValue && value >= idealMinimumValue && value <= idealMaximumValue) || 
+                (idealMinimumValue && !idealMaximumValue && value >= idealMinimumValue) ||
+                (!idealMinimumValue && idealMaximumValue && value <= idealMaximumValue)) {
+
+                situation = "Within the ideal";
+                node.status({fill:"blue", shape:"dot", text:"ideal"});
+            } else if ((minimumValue && maximumValue && value >= minimumValue && value <= maximumValue) || 
+                        (minimumValue && !maximumValue && value >= minimumValue) ||
+                        (!minimumValue && maximumValue && value <= maximumValue)) {
+
+                situation = "Within the limit";
+                node.status({fill:"green", shape:"dot", text:"limit"});
+            } else {
+                situation = "Out of the limit";
+                node.status({fill:"red", shape:"dot", text:"atention"});
+            }
+            
+            // if (value >= idealMinimumValue && value <= idealMaximumValue) {
+            //     situation = "Within the ideal";
+            //     node.status({fill:"blue", shape:"dot", text:"ideal"});
+            // } else if (value >= minimumValue && value <= maximumValue) {
+            //     situation = "Within the limit";
+            //     node.status({fill:"green", shape:"dot", text:"limit"});
+            // } else {
+            //     situation = "Out of the limit";
+            //     node.status({fill:"red", shape:"dot", text:"atention"});
             // }
 
+            var response = {"sensor": sensor, "valor": value, "situation": situation};
             msg.payload = response;
+
+            msg.query = {"sensor": sensor};
 
             node.send(msg);
         });

@@ -5,10 +5,10 @@
         defaults: {
             name: {value:""},
             sensor: {value:""},
-            minimumValue: {value:0, validate:RED.validators.number()},
-            maximumValue: {value:0}, validate:RED.validators.number(),
-            idealMinimumValue: {value:0, validate:RED.validators.number()},
-            idealMaximumValue: {value:0, validate:RED.validators.number()}
+            minimumValue: {value:null, validate:RED.validators.number()},
+            maximumValue: {value:null}, validate:RED.validators.number(),
+            idealMinimumValue: {value:null, validate:RED.validators.number()},
+            idealMaximumValue: {value:null, validate:RED.validators.number()}
         },
         inputs:1,
         outputs:1,
@@ -30,19 +30,19 @@
     </div>
     <div class="form-row">
         <label for="node-input-minimumValue"><i class="fa fa-arrow-down"></i> Minimum Value</label>
-        <input type="number" id="node-input-minimumValue" placeholder="Minimum Value" required="true">
+        <input type="number" step="0.0001" id="node-input-minimumValue" placeholder="Minimum Value">
     </div>
     <div class="form-row">
         <label for="node-input-maximumValue"><i class="fa fa-arrow-up"></i> Maximum Value</label>
-        <input type="number" id="node-input-maximumValue" placeholder="Maximum Value" required="true">
+        <input type="number" step="0.0001" id="node-input-maximumValue" placeholder="Maximum Value">
     </div>
     <div class="form-row">
         <label for="node-input-idealMinimumValue"><i class="fa fa-arrow-circle-down"></i> Ideal Minimum Value</label>
-        <input type="number" id="node-input-idealMinimumValue" placeholder="Ideal Minimum Value" required="true">
+        <input type="number" step="0.0001" id="node-input-idealMinimumValue" placeholder="Ideal Minimum Value">
     </div>
     <div class="form-row">
         <label for="node-input-idealMaximumValue"><i class="fa fa-arrow-circle-up"></i> Ideal Maximum Value</label>
-        <input type="number" id="node-input-idealMaximumValue" placeholder="Ideal Maximum Value" required="true">
+        <input type="number" step="0.0001" id="node-input-idealMaximumValue" placeholder="Ideal Maximum Value">
     </div>
 </script>
 
