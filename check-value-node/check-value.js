@@ -37,17 +37,6 @@ module.exports = function(RED) {
                 situation = "Out of the limit";
                 node.status({fill:"red", shape:"dot", text:"atention"});
             }
-            
-            // if (value >= idealMinimumValue && value <= idealMaximumValue) {
-            //     situation = "Within the ideal";
-            //     node.status({fill:"blue", shape:"dot", text:"ideal"});
-            // } else if (value >= minimumValue && value <= maximumValue) {
-            //     situation = "Within the limit";
-            //     node.status({fill:"green", shape:"dot", text:"limit"});
-            // } else {
-            //     situation = "Out of the limit";
-            //     node.status({fill:"red", shape:"dot", text:"atention"});
-            // }
 
             var response = {"sensor": sensor, "valor": value, "situation": situation};
             msg.payload = response;
